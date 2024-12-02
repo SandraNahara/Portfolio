@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Milestone 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2C7873;
+            --secondary-color: #6FB98F;
+            --accent-color: #4ECDC4;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .milestone-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .milestone-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .prototype-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .prototype-item {
+            background-color: var(--background-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-item {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            width: calc(50% - 2rem);
+            margin-left: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .feedback-card {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .feedback-card blockquote {
+            font-style: italic;
+            margin: 1rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .recommendation-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .milestone-header {
+                padding: 2rem 1rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-content {
+                width: calc(100% - 2rem);
+                margin-left: 2rem !important;
+            }
+        }
+        .theme-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-testimonial {
+    background: var(--background-color);
+    padding: var(--spacing-md);
+    border-left: 4px solid var(--accent-color);
+    margin: var(--spacing-md) 0;
+}
+
+.testimonial-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-bottom: var(--spacing-sm);
+}
+
+.trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.trend-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+.methodology-card {
+    height: 100%;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal);
+}
+
+.methodology-card:hover {
+    transform: translateY(-5px);
+}
+
+.full-width-image {
+    width: 100%;
+    border-radius: var(--radius-md);
+    margin: var(--spacing-md) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.prototype-showcase {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.prototype-links {
+    padding: var(--spacing-md);
+    background: var(--background-color);
+    border-radius: var(--radius-md);
+}
+
+.prototype-links a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.prototype-links a:hover {
+    color: var(--accent-color);
+}
+.market-trends {
+    padding: var(--spacing-lg);
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.trend-card {
+    padding: var(--spacing-md);
+    background-color: var(--background-color);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform var(--transition-normal);
+}
+
+.trend-card:hover {
+    transform: translateY(-5px);
+}
+
+.trend-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.trend-description {
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .trends-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+            <a href="index.html" class="logo">SaludApp</a>
+            <ul>
+                <li><a href="milestone1.html">Milestone 1</a></li>
+                <li><a href="milestone2.html">Milestone 2</a></li>
+                <li><a href="milestone3.html">Milestone 3</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="milestone-header">
+            <h1>Milestone 3: Estudio de usabilidad de SaludApp</h1>
+            <p>Análisis detallado de la experiencia de usuario y resultados de las pruebas</p>
+        </div>
+
+        <div class="section-grid">
+            <div class="section-card full-width">
+                <h2>Antecedentes del Proyecto</h2>
+                <p>La Salud App es una aplicación destinada a mejorar el acceso a servicios de salud y medicamentos en comunidades locales. Ofrece información detallada sobre proveedores de salud, clínicas y disponibilidad de medicamentos, simplificando la coordinación de la atención médica para reducir retrasos en el tratamiento y mejorar la experiencia del paciente.</p>
+                <p>Vemos esta idea como una herramienta que puede apoyar o proporcionar acceso fácil y rápido a información y servicios de salud.</p>
+            </div>
+
+            <div class="section-card full-width">
+                <h2>Estado de Prototipos (Figma)</h2>
+                <div class="prototype-showcase"> 
+                    <img src="img/figma.png" alt="Perfil de María González" class="profile-image rounded-lg shadow-md" style="width: 730px; height: 350px; object-fit: cover;">
+                </div>
+                   
+            </div>
+
+            <div class="section-card full-width">
+                <h2>Elección y justificación de la herramienta</h2>
+                <p>Utilizamos MAZE, ya que el enfoque está en la experiencia del usuario y se requiere un análisis detallado del comportamiento de los usuarios en un prototipo o sitio web. MAZE fue nuestra opción adecuada. Su capacidad para realizar pruebas de usabilidad con usuarios reales, ofreciendo métricas precisas sobre la navegación, el tiempo de interacción y los patrones de comportamiento, fue beneficioso para obtener información valiosa sobre la experiencia del usuario.</p>
+                
+                <h3 class="mt-4">Tecnologías para la Implementación</h3>
+                <ul>
+                    <li>HTML, CSS, JavaScript y APIS</li>
+                </ul>
+            
+                <h3 class="mt-4">Diseño de tareas</h3>
+                <ul>
+                    <li><strong>Tarea de Navegación (Relevante):</strong> Se pide al participante que encuentre y acceda a una sección específica dentro del sitio o aplicación, utilizando solo la barra de búsqueda. Esto pondrá a prueba la eficacia y la visibilidad de la función de búsqueda, así como la capacidad del diseño para guiar al usuario hacia el destino deseado.</li>
+                    <li><strong>Tarea de Acceso a Información Crucial (Relevante y Desafiante):</strong> Se le pide al usuario que encuentre y acceda a información crítica, como acceder a una cita clínica. Esto evaluará la accesibilidad y visibilidad de información vital para el usuario en todo el diseño.</li>
+                </ul>
+            </div>
+            
+            <div class="section-card full-width">
+                <h2>Selección y Descripción del Grupo de Usuarios</h2>
+                <div class="participants-grid">
+                    <div class="metric-card">
+                        <h3>Participantes</h3>
+                        <div class="metric-value">5</div>
+                        <p>participantes</p>
+                    </div>
+                </div>
+                
+                <div class="user-groups mt-4">
+                    <ul>
+                        <li>Participantes de entre 18 y 50 años que residen en Encarnación</li>
+                        <li>Usuarios de la app</li>
+                        <li>Usuarios con diferentes habilidades y necesidades</li>
+                        <li>Profesionales de la Salud</li>
+                        <li>Organizaciones de Salud Comunitaria</li>
+                        <li>Pacientes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section-card full-width">
+                <h2>Realización del Test</h2>
+                <h3>Preguntas de investigación</h3>
+                <ol>
+                    <li>¿Cómo valoran los usuarios la facilidad de uso de la aplicación "Salud App" al buscar profesionales de la salud, programar citas y comprar medicamentos?</li>
+                    <li>¿Cuál es el nivel de satisfacción de los usuarios al utilizar la aplicación "Salud App" para acceder a servicios de salud y medicamentos?</li>
+                    <li>¿Qué obstáculos encuentran los usuarios al buscar y comprar medicamentos a través de la aplicación "Salud App" y cómo podrían resolverse?</li>
+                    <li>¿Cuáles son las principales preocupaciones de los usuarios en relación con la seguridad y privacidad de sus datos médicos y personales?</li>
+                    <li>¿Cómo perciben los usuarios la eficacia de la comunicación con profesionales de la salud a través de la aplicación "Salud App" y qué mejoras podrían implementarse?</li>
+                </ol>
+            </div>
+
+            <div class="section-card full-width">
+                <h2>Temas</h2>
+            
+                <!-- Tema 1 -->
+                <div class="theme-card mb-4">
+                    <h3>La gente quiere solicitar Servicios médicos Rápidamente</h3>
+                    <h4>Evidencia de apoyo del estudio de usabilidad:</h4>
+                    <ul>
+                        <li>4 de 5 dijeron que les tomó muy poco tiempo buscar un profesional de la salud en su área y programar una cita para una consulta ficticia.</li>
+                        <li>3 de 5 comentaron adicionalmente de forma similar que les gusta la eficacia de la rapidez en la que pueden sacar turno.</li>
+                    </ul>
+                    <blockquote class="user-testimonial">
+                        <img src="img/testimonial1.png" alt="Testimonio de Steffani Vanni" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+                        <img src="img/testimonial2.png" alt="Testimonio de Steffani Vanni" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+                        <p>" Me gusta la eficacia de la velocidad con la que puedo solicitar un turno a través de una búsqueda en donde me muestra muchas opciones" - Steffani Vanni (Solicitó una consulta en Clínica Médica)</p>
+                    </blockquote>
+                </div>
+            
+                <!-- Tema 2 -->
+                <div class="theme-card mb-4">
+                    <h3>La gente quiere encontrar medicamentos y conocer la ubicación de los lugares de ventas</h3>
+                    <h4>Evidencia de apoyo del estudio de usabilidad:</h4>
+                    <ul>
+                        <li>3 de los 5 participantes dijeron que querían acceder a servicios y/o medicamentos en ubicaciones que les quede cerca.</li>
+                    </ul>
+                    <blockquote class="user-testimonial">
+                        <img src="img/testimonial3.png" alt="Testimonio de Mabel Servian" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+                        <p>"Suelo comprar medicamentos en cantidades para llevarlos a pacientes del Interior y normalmente no se si las farmacias cuentan con dicho medicamento, por ende esta aplicación en la parte de búsqueda con mapa me pareció muy eficaz para verificar en que lugares puedo encontrar los medicamentos que necesito comprar" - Mabel Servian - Médica Clínica-Familiar</p>
+                    </blockquote>
+                </div>
+            
+                <!-- Tema 3 -->
+                <div class="theme-card mb-4">
+                    <h3>La gente quiere saber la información de los servicios que solicita</h3>
+                    <h4>Evidencia de apoyo del estudio de usabilidad:</h4>
+                    <ul>
+                        <li>5 de los 5 participantes dijeron de forma similar que fue fácil acceder a la búsqueda de una especialidad médica</li>
+                    </ul>
+                    <blockquote class="user-testimonial">
+                        <img src="img/testimonial4.png" alt="Testimonio de Eliane Ramirez"class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+                        <img src="img/testimonial5.png" alt="Testimonio de Eliane Ramirez" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+                        <p>"Considero útil la forma en la que puedo ver en dónde puedo acceder a servicios médicos, como en este caso acceder a un Odontólogo buscando específicamente lo que necesito" - Eliane Ramirez - Paciente</p>
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- Información y Recomendaciones -->
+            <div class="section-card full-width">
+                <h2>Información y Recomendaciones</h2>
+                
+                <div class="trends-grid">
+                    <div class="trend-card">
+                        <h3>Tendencias de mercado</h3>
+                        <ul>
+                            <li>
+                                <h4>Solicitud rápida de servicios médicos</h4>
+                                <p>La mayoría de los participantes encontraron la búsqueda y programación de citas médicas rápidas y eficientes.</p>
+                            </li>
+                            <li>
+                                <h4>Acceso a medicamentos y ubicaciones cercanas</h4>
+                                <p>La necesidad de acceder a medicamentos en ubicaciones cercanas fue mencionada por varios participantes.</p>
+                            </li>
+                            <li>
+                                <h4>Acceso a información detallada sobre servicios de salud</h4>
+                                <p>Todos los participantes expresaron la importancia de acceder a información detallada sobre los servicios de salud.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-card full-width">
+            <h2>Detalles del estudio</h2>
+            
+            <div class="methodology-section">
+                <h3>Metodología</h3>
+                <div class="grid grid-cols-3 gap-md">
+                    <!-- Participantes -->
+                    <div class="methodology-card p-4 bg-gray-100 rounded">
+                        <h4>Participantes</h4>
+                        <ul>
+                            <li>5 participantes</li>
+                            <li>Entre 18 y 50 años</li>
+                            <li>Residentes en Encarnación</li>
+                            <li>Usuarios de la app</li>
+                            <li>Diferentes habilidades y necesidades</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Preguntas de investigación -->
+                    <div class="methodology-card p-4 bg-gray-100 rounded">
+                        <h4>Preguntas de investigación</h4>
+                        <ul>
+                            <li>Facilidad de uso en búsqueda de profesionales</li>
+                            <li>Nivel de satisfacción con servicios</li>
+                            <li>Obstáculos en búsqueda de medicamentos</li>
+                            <li>Preocupaciones sobre seguridad de datos</li>
+                            <li>Eficacia de comunicación con profesionales</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Métodos -->
+                    <div class="methodology-card p-4 bg-gray-100 rounded">
+                        <h4>Métodos Utilizados</h4>
+                        <ul>
+                            <li>MAZE para pruebas de usabilidad</li>
+                            <li>Análisis detallado de comportamiento</li>
+                            <li>Métricas de navegación</li>
+                            <li>Patrones de interacción</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-card full-width">
+            <h2>Información y Recomendaciones</h2>
+            
+            <div class="market-trends">
+                <h3>Tendencias de mercado</h3>
+                
+                <div class="trends-grid grid-cols-3 gap-md">
+                    <!-- Tendencia 1 -->
+                    <div class="trend-card">
+                        <div class="trend-title">Solicitud rápida de servicios médicos</div>
+                        <p class="trend-description">La mayoría de los participantes encontraron la búsqueda y programación de citas médicas rápidas y eficientes.</p>
+                    </div>
+        
+                    <!-- Tendencia 2 -->
+                    <div class="trend-card">
+                        <div class="trend-title">Acceso a medicamentos y ubicaciones cercanas</div>
+                        <p class="trend-description">La necesidad de acceder a medicamentos en ubicaciones cercanas fue mencionada por varios participantes.</p>
+                    </div>
+        
+                    <!-- Tendencia 3 -->
+                    <div class="trend-card">
+                        <div class="trend-title">Acceso a información detallada sobre servicios de salud</div>
+                        <p class="trend-description">Todos los participantes expresaron la importancia de acceder a información detallada sobre los servicios de salud.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección de Prototipo Probado -->
+        <div class="section-card full-width">
+            <h2>Prototipo probado</h2>
+            <div class="prototype-showcase">
+                
+                <div class="prototype-links mt-4">
+                    <p>Enlaces importantes:</p>
+                    <ul>
+                        <li>Figma: <a href="https://www.figma.com/file/caB5kAUnXdlS9Mys168NgD/HCI-2023" target="_blank">Ver diseño</a></li>
+                        <li>Research Plan: <a href="https://docs.google.com/document/d/1qG6ZUNohePR8z1jNTDxYZ50xZqt83-MYdozCMWzTXB0/edit" target="_blank">Ver plan</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" title="Volver arriba">↑</a>
+
+    <script>
+        // Smooth scroll para el botón de volver arriba
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mostrar/ocultar botón de volver arriba
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

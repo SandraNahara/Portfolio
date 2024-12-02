@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludApp - Milestone 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2C7873;
+            --secondary-color: #6FB98F;
+            --accent-color: #4ECDC4;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .milestone-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .milestone-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .section-card ul {
+            list-style-position: inside;
+            margin: 1rem 0;
+        }
+
+        .section-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .section-card li:before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .requirements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .requirements-section {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .requirements-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .milestone-header {
+                padding: 2rem 1rem;
+            }
+
+            .requirements-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .personas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.persona-content {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.persona-image {
+    flex-shrink: 0;
+}
+
+.persona-info {
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .persona-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .persona-image {
+        margin-bottom: 1rem;
+    }
+}
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .section-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+            <a href="index.html" class="logo">SaludApp</a>
+            <ul>
+                <li><a href="milestone1.html">Milestone 1</a></li>
+                <li><a href="milestone2.html">Milestone 2</a></li>
+                <li><a href="milestone3.html">Milestone 3</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="milestone-header">
+            <h1>Milestone 1: Investigación y Análisis</h1>
+            <p>Fase inicial del proyecto donde se establecen las bases y se realiza la investigación preliminar</p>
+        </div>
+
+        <div class="section-grid">
+            <div class="section-card full-width">
+                <h2>Planteamiento del Problema</h2>
+              
+                <p>En la actualidad, se han identificado varios problemas críticos en el sistema de salud:</p>
+                <ul>
+                    <li>Poca frecuencia de consultas médicas por parte de las personas debido al desconocimiento de los Centros de Salud que cuentan con las especialidades médicas necesarias.</li>
+                    <li>Dificultad para comparar precios entre diferentes Centros de Salud para las especialidades médicas requeridas y los medicamentos necesarios.</li>
+                    <li>Largos tiempos de espera para obtener citas con especialistas médicos al hacerlo de forma presencial, lo cual es especialmente problemático para personas que deben trabajar desde tempranas horas.</li>
+                    <li>Necesidad de madrugar y hacer largas filas para asegurar una cita médica, sin garantía de obtenerla el mismo día.</li>
+                </ul>
+                <div class="metrics-grid mt-4">
+                    <div class="metric-card">
+                        <h3>Impacto en Tiempo</h3>
+                        <p>Los pacientes pierden horas valiosas haciendo fila para conseguir citas médicas</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Accesibilidad</h3>
+                        <p>Limitada información sobre disponibilidad de especialistas y servicios médicos</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Eficiencia</h3>
+                        <p>Sistema actual genera frustración y pérdida de recursos tanto para pacientes como para centros médicos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Investigación -->
+            <div class="section-card">
+                <h2>Métodos de Investigación</h2>
+                
+                <h3 class="mt-4">Metodología Aplicada:</h3>
+                <ul>
+                    <li>Plataforma de Encuesta: Google Forms distribuido vía WhatsApp</li>
+                    <li>Entrevistas a stakeholders clave (médicos y personal administrativo)</li>
+                    <li>Muestreo enfocado en personas entre 20-30 años</li>
+                    <li>Nivel de confianza: 95% (Z = 1.96)</li>
+                    <li>Margen de error: 5% (E = 0.05)</li>
+                </ul>
+                <h3 class="mt-4">Alcance del Estudio:</h3>
+                <ul>
+                    <li>Total de Encuestados: 33 personas</li>
+                    <li>Rango de edad: desde menores de 20 hasta mayores de 50 años</li>
+                    <li>Tipos de preguntas: abiertas, elección única y de escala</li>
+                </ul>
+            </div>
+
+            <!-- Mapa de Empatía -->
+    <div class="section-card">
+        <h2>Mapa de Empatía</h2>
+        <div class="empathy-map">
+            <div class="grid grid-cols-2 gap-md">
+                <div class="empathy-quadrant p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">¿Qué piensa y siente?</h3>
+                    <ul>
+                        <li>Frustración por las largas filas</li>
+                        <li>Preocupación por la seguridad de datos personales</li>
+                        <li>Inseguridad sobre la disponibilidad de citas</li>
+                    </ul>
+                </div>
+                <div class="empathy-quadrant p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">¿Qué ve?</h3>
+                    <ul>
+                        <li>Cupo limitado en centros médicos</li>
+                        <li>Largas filas de espera</li>
+                        <li>Horarios poco claros o mal organizados</li>
+                    </ul>
+                </div>
+                <div class="empathy-quadrant p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">¿Qué oye?</h3>
+                    <ul>
+                        <li>Recomendaciones de amigos sobre médicos y centros</li>
+                        <li>Experiencias en otros países con sistemas más eficientes</li>
+                        <li>Preocupaciones sobre seguridad de datos personales</li>
+                    </ul>
+                </div>
+                <div class="empathy-quadrant p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">¿Qué dice y hace?</h3>
+                    <ul>
+                        <li>Desea un método fácil de utilizar para sacar turnos</li>
+                        <li>Valora la calidad de atención médica</li>
+                        <li>Expresa preocupación por la seguridad de sus datos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="outcomes-section mt-4">
+            <h3>Esfuerzos y Resultados</h3>
+            <div class="grid grid-cols-2 gap-md">
+                <div class="p-4 bg-gray-100 rounded">
+                    <h4 class="text-primary">Esfuerzos</h4>
+                    <ul>
+                        <li>No conocen aplicaciones similares</li>
+                        <li>Pierden interés por acceso limitado a turnos</li>
+                        <li>Dificultad para coordinar horarios</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-gray-100 rounded">
+                    <h4 class="text-primary">Resultados</h4>
+                    <ul>
+                        <li>Mejor organización de su agenda médica</li>
+                        <li>Acceso más eficiente a servicios de salud</li>
+                        <li>Reducción de tiempo perdido en esperas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Métricas Clave -->
+    <div class="section-card">
+        <h2>Métricas Clave de la Investigación</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Frecuencia de Consultas</h3>
+                <div class="metric-value">75.8%</div>
+                <p>Usuarios buscan consultas médicas 1-2 veces al mes</p>
+            </div>
+            <div class="metric-card">
+                <h3>Satisfacción Actual</h3>
+                <div class="metric-value">24.2%</div>
+                <p>Usuarios satisfechos con el proceso actual</p>
+            </div>
+            <div class="metric-card">
+                <h3>Importancia de Acceso</h3>
+                <div class="metric-value">87.9%</div>
+                <p>Considera muy importante el acceso rápido a especialistas</p>
+            </div>
+            <div class="metric-card">
+                <h3>Tamaño de Muestra</h3>
+                <div class="metric-value">33</div>
+                <p>Personas encuestadas en total</p>
+            </div>
+        </div>
+
+        <div class="key-findings mt-4">
+            <h3>Hallazgos Principales</h3>
+            <div class="grid grid-cols-2 gap-md mt-2">
+                <div class="p-4 bg-gray-100 rounded">
+                    <h4>Preferencias de Usuarios</h4>
+                    <ul>
+                        <li>Necesidad de sistema fácil de usar</li>
+                        <li>Importancia de notificaciones y recordatorios</li>
+                        <li>Preferencia por visualización clara de horarios</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-gray-100 rounded">
+                    <h4>Áreas de Mejora</h4>
+                    <ul>
+                        <li>Optimización del proceso de reserva</li>
+                        <li>Reducción de tiempos de espera</li>
+                        <li>Mejor acceso a información de especialistas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+           <!-- Mapa de Recorrido de Usuario -->
+           <div class="section-card">
+            <h2>Mapa de Recorrido de Usuario</h2>
+            <div class="timeline">
+                <div class="journey-steps grid grid-cols-1 gap-md">
+                    <div class="journey-step p-4 bg-gray-100 rounded">
+                        <h3 class="text-primary">1. Inicio</h3>
+                        <div class="journey-content">
+                            <h4>Acción</h4>
+                            <p>El usuario decide buscar una cita médica</p>
+                            <h4 class="mt-2">Dolor</h4>
+                            <p>Incertidumbre sobre el proceso</p>
+                            <h4 class="mt-2">Oportunidad</h4>
+                            <p>Proporcionar información clara desde el inicio</p>
+                        </div>
+                    </div>
+    
+                    <div class="journey-step p-4 bg-gray-100 rounded">
+                        <h3 class="text-primary">2. Búsqueda</h3>
+                        <div class="journey-content">
+                            <h4>Acción</h4>
+                            <p>Buscar información sobre horarios disponibles</p>
+                            <h4 class="mt-2">Dolor</h4>
+                            <p>Información dispersa o poco clara</p>
+                            <h4 class="mt-2">Oportunidad</h4>
+                            <p>Sistema centralizado de información</p>
+                        </div>
+                    </div>
+    
+                    <div class="journey-step p-4 bg-gray-100 rounded">
+                        <h3 class="text-primary">3. Espera</h3>
+                        <div class="journey-content">
+                            <h4>Acción</h4>
+                            <p>Madrugar y hacer fila</p>
+                            <h4 class="mt-2">Dolor</h4>
+                            <p>Largas filas e incertidumbre</p>
+                            <h4 class="mt-2">Oportunidad</h4>
+                            <p>Reserva digital de turnos</p>
+                        </div>
+                    </div>
+    
+                    <div class="journey-step p-4 bg-gray-100 rounded">
+                        <h3 class="text-primary">4. Confirmación</h3>
+                        <div class="journey-content">
+                            <h4>Acción</h4>
+                            <p>Esperar confirmación de la cita</p>
+                            <h4 class="mt-2">Dolor</h4>
+                            <p>Falta de certeza sobre la disponibilidad</p>
+                            <h4 class="mt-2">Oportunidad</h4>
+                            <p>Confirmación inmediata y recordatorios</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Conclusiones y Hallazgos -->
+        <div class="section-card">
+            <h2>Conclusiones y Hallazgos</h2>
+            <div class="grid grid-cols-1 gap-md">
+                <div class="conclusion-card p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">Problemática del acceso a la atención médica</h3>
+                    <p>Existe una problemática común relacionada con el acceso a la atención médica, que incluye la dificultad para encontrar médicos, profesionales de la salud y centros médicos, así como la frustración de los pacientes al tratar de agendar citas.</p>
+                </div>
+                <div class="conclusion-card p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">Soluciones tecnológicas</h3>
+                    <p>Se ha observado que existen soluciones tecnológicas efectivas como Medicap y Doctoralia que permiten a los usuarios buscar médicos, leer reseñas y agendar citas en línea, ofreciendo una forma eficiente de acceder a la atención médica.</p>
+                </div>
+                <div class="conclusion-card p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">Facilitación de búsqueda</h3>
+                    <p>Google Maps desempeña un papel importante al facilitar la búsqueda de ubicaciones de clínicas y centros de salud, reduciendo la incertidumbre de los usuarios y ahorrando tiempo en la localización de servicios médicos.</p>
+                </div>
+                <div class="conclusion-card p-4 bg-gray-100 rounded">
+                    <h3 class="text-primary">Tendencia hacia la digitalización</h3>
+                    <p>Se observa una tendencia creciente hacia la digitalización de los servicios de atención médica, con aplicaciones y plataformas en línea desempeñando un papel crucial en la forma en que los pacientes buscan atención médica.</p>
+                </div>
+            </div>
+        </div>
+
+            <!-- Estadísticas -->
+            <div class="section-card">
+                <h2>Estadísticas</h2>
+                <img src="img/estadistica1.png" style="width: 300px; height: 280px;" alt="Estadísticas">
+                <div class="metrics-grid mt-4">
+                    <div class="metric-card">
+                        <h3>Satisfacción</h3>
+                        <div class="metric-value">24.2%</div>
+                        <p>Satisfechos con el proceso actual</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Búsqueda</h3>
+                        <div class="metric-value">75.8%</div>
+                        <p>Buscan consultas 1-2 veces al mes</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Importancia</h3>
+                        <div class="metric-value">87.9%</div>
+                        <p>Valoran el acceso rápido a especialistas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historias de Usuario -->
+            <div class="section-card full-width">
+                <h2>Historias de Usuarios y Personas</h2>
+                <div class="user-stories grid grid-cols-2 gap-md">
+                    <div class="story-card p-4 bg-gray-100 rounded">
+                        <h3>Historia 1: Búsqueda de Medicamentos</h3>
+                        <p><strong>Como</strong> usuario,</p>
+                        <p><strong>Quiero</strong> buscar un medicamento en las farmacias más cercanas</p>
+                        <p><strong>Para</strong> visualizar el precio que más me convenga</p>
+                    </div>
+                    <div class="story-card p-4 bg-gray-100 rounded">
+                        <h3>Historia 2: Notificaciones</h3>
+                        <p><strong>Como</strong> usuario,</p>
+                        <p><strong>Quiero</strong> recibir notificaciones de mis citas unas horas antes</p>
+                        <p><strong>Para</strong> no olvidar la fecha acordada</p>
+                    </div>
+                    <div class="story-card p-4 bg-gray-100 rounded">
+                        <h3>Historia 3: Búsqueda de Especialidad</h3>
+                        <p><strong>Como</strong> usuario,</p>
+                        <p><strong>Quiero</strong> buscar una especialidad médica cerca de mi ubicación</p>
+                        <p><strong>Para</strong> ver las opciones de precios disponibles</p>
+                    </div>
+                    <div class="story-card p-4 bg-gray-100 rounded">
+                        <h3>Historia 4: Gestión de Horarios</h3>
+                        <p><strong>Como</strong> usuario,</p>
+                        <p><strong>Quiero</strong> poder elegir un horario disponible en la consulta</p>
+                        <p><strong>Para</strong> agendar mi cita en un momento conveniente</p>
+                    </div>
+                </div>
+
+                <div class="personas-section mt-4">
+                    <h3 class="mb-4">Personas</h3>
+                    <div class="personas-grid">
+                        <div class="persona-card p-4 bg-gray-100 rounded">
+                            <div class="persona-content">
+                                <div class="persona-image">
+                                    <img src="img/doctor.jpeg" alt="Doctora" class="rounded" style="width: 200px; height: 250px; object-fit: cover;">
+                                </div>
+                                <div class="persona-info">
+                                    <h4 class="mb-2">Stakeholder: Doctora</h4>
+                                    <p>"La aplicación debe ser fácil de manejar. Las aplicaciones pueden generar grandes beneficios de comodidad si sirven para asignación o cancelación de citas."</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="persona-card p-4 bg-gray-100 rounded">
+                            <div class="persona-content">
+                                <div class="persona-image">
+                                    <img src="img/recepcionista.avif" alt="Recepcionista" class="rounded" style="width: 200px; height: 250px; object-fit: cover;">
+                                </div>
+                                <div class="persona-info">
+                                    <h4 class="mb-2">Stakeholder: Recepcionista</h4>
+                                    <p>"La calidad del profesional y la buena atención del área de salud son aspectos fundamentales."</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="persona-card p-4 bg-gray-100 rounded">
+                            <div class="persona-content">
+                                <div class="persona-image">
+                                    <img src="img/persona.webp" alt="Usuario" class="rounded" style="width: 200px; height: 250px; object-fit: cover;">
+                                </div>
+                                <div class="persona-info">
+                                    <h4 class="mb-2">Usuario Final</h4>
+                                    <p>"Necesito una aplicación ilustrativa con videos que detallen todo lo necesario para la gente que no entiende mucho de tecnología."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card full-width">
+                <h2>Requisitos Iniciales</h2>
+                <div class="requirements-container">
+                    <div class="requirements-section p-4 bg-gray-100 rounded">
+                        <h3 class="text-primary mb-4">Requisitos Funcionales</h3>
+                        <ul>
+                            <li class="mb-3">
+                                <strong>Autenticación de Usuario</strong>
+                                <p>El usuario podrá iniciar sesión en el sistema utilizando su nombre de usuario y contraseña.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Búsqueda de Medicamentos</strong>
+                                <p>El usuario podrá realizar búsquedas de medicamentos en las farmacias más cercanas a su posición.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Búsqueda de Especialidades</strong>
+                                <p>El usuario podrá realizar búsquedas de especialidades médicas más cercanas a su posición.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Gestión de Turnos</strong>
+                                <p>El usuario podrá visualizar el horario disponible de turnos médicos de la especialidad que elija y podrá reservar una cita.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="requirements-section p-4 bg-gray-100 rounded">
+                        <h3 class="text-primary mb-4">Requisitos No Funcionales</h3>
+                        <ul>
+                            <li class="mb-3">
+                                <strong>Usabilidad</strong>
+                                <p>El sistema debe ser fácil de usar y comprender para todos los usuarios.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Performance</strong>
+                                <p>El sistema debe tener buena performance y responder rápidamente a las solicitudes.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Seguridad</strong>
+                                <p>El sistema debe validar los datos de la persona al registrarse como usuario.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Confiabilidad</strong>
+                                <p>El sistema debe ser confiable y cumplir con los requisitos del usuario.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="additional-requirements mt-4">
+                    <h3 class="mb-4">Preguntas Clave (HMW)</h3>
+                    <div class="grid grid-cols-2 gap-md">
+                        <div class="p-4 bg-gray-100 rounded">
+                            <h4 class="text-primary mb-3">Optimización de Procesos</h4>
+                            <ul>
+                                <li class="mb-2">¿Cómo podríamos optimizar el proceso de agendamiento de citas médicas para reducir la frustración de los pacientes?</li>
+                                <li class="mb-2">¿Cómo podríamos garantizar que los pacientes obtengan citas médicas en un tiempo razonable?</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-100 rounded">
+                            <h4 class="text-primary mb-3">Mejora de Experiencia</h4>
+                            <ul>
+                                <li class="mb-2">¿Cómo podríamos mejorar la eficiencia de la gestión de citas médicas para minimizar las largas esperas?</li>
+                                <li class="mb-2">¿Cómo podríamos utilizar la tecnología para notificar a los pacientes sobre la disponibilidad de citas médicas de manera más efectiva?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirement-metrics mt-4">
+                    <h3 class="mb-4">Métricas de Éxito</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <h3>Usabilidad</h3>
+                            <div class="metric-value">95%</div>
+                            <p>Objetivo de satisfacción de usuarios</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Performance</h3>
+                            <div class="metric-value">&lt; 3s</div>
+                            <p>Tiempo de respuesta objetivo</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Disponibilidad</h3>
+                            <div class="metric-value">99.9%</div>
+                            <p>Tiempo de actividad del sistema</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" title="Volver arriba">↑</a>
+
+    <script>
+        // Smooth scroll para el botón de volver arriba
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mostrar/ocultar botón de volver arriba
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

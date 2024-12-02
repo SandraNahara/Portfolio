@@ -1,0 +1,80 @@
+/* Grid de métricas */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+/* Tarjeta de métrica */
+.metric-card {
+    background-color: var(--background-color);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform var(--transition-normal);
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Título de métrica */
+.metric-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Valor de métrica */
+.metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    line-height: 1.2;
+    margin: var(--spacing-sm) 0;
+}
+
+/* Descripción de métrica */
+.metric-description {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Variantes de métricas */
+.metric-card-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.metric-card-primary .metric-value {
+    color: var(--white);
+}
+
+.metric-card-primary .metric-description {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Tamaños de métricas */
+.metric-sm .metric-value {
+    font-size: 1.5rem;
+}
+
+.metric-lg .metric-value {
+    font-size: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-card {
+        padding: var(--spacing-md);
+    }
+
+    .metric-value {
+        font-size: 1.75rem;
+    }
+}

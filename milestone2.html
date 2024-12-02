@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaludApp - Milestone 2</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2C7873;
+            --secondary-color: #6FB98F;
+            --accent-color: #4ECDC4;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .milestone-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .milestone-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .sketch-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .sketch-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .sketch-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .user-story {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .user-story h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .evaluation-list {
+            list-style: none;
+        }
+
+        .evaluation-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .evaluation-list li:before {
+            content: "✓";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        .function-diagram {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .navbar nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .milestone-header {
+                padding: 2rem 1rem;
+            }
+
+            .sketch-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <nav>
+      <a href="index.html" class="logo">SaludApp</a>
+      <ul>
+        <li>
+          <a href="milestone1.html">Milestone 1</a>
+        </li>
+        <li>
+          <a href="milestone2.html">Milestone 2</a>
+        </li>
+        <li>
+          <a href="milestone3.html">Milestone 3</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="milestone-header">
+      <h1>Milestone 2: Diseño y Prototipado Inicial</h1>
+      <p>Fase de conceptualización y diseño de la experiencia de usuario</p>
+    </div>
+    <div class="section-card full-width">
+      <h2>Funciones del Producto</h2>
+      <div class="function-diagram"><img src="img/funciones.png" alt="Perfil de María González" class="profile-image rounded-lg shadow-md" style="width: 730px; height: 350px; object-fit: cover;"></div>
+      <p>Las principales funcionalidades de AppSalud incluyen:</p>
+      <ul>
+        <li><strong>Búsqueda:</strong> Localización de Puestos de Salud o Medicamentos en distintas farmacias</li>
+        <li><strong>Resultados de Búsqueda:</strong> Lista de medicamentos en distintas farmacias disponibles, puestos de salud o clínicas para agendar una cita médica</li>
+        <li><strong>Filtrado y Ordenamiento:</strong> Lista ordenada según las preferencias del usuario por categoría, ubicación o precio</li>
+        <li><strong>Detallado:</strong> Información específica sobre precios, disponibilidad y otros detalles de Centros de Salud, Clínicas y Farmacias</li>
+        <li><strong>Notificaciones:</strong> Alertas sobre el estado de citas médicas</li>
+        <li><strong>Perfil de Usuario:</strong> Información completa para proveedores de servicios en la app</li>
+      </ul>
+    </div>
+    <div class="section-card">
+      <h2>Metáforas de Diseño</h2>
+      <p>Conceptos que guían nuestra interfaz:</p>
+      <ul>
+        <li><strong>Mapa de Salud:</strong> Una interfaz que permite a los usuarios explorar y navegar por centros de salud, hospitales y farmacias como si estuvieran usando un mapa físico, con marcadores interactivos para más información</li>
+        <li><strong>Farmacia Virtual:</strong> Presentación de medicamentos en "estanterías virtuales" que muestran disponibilidad y precios en farmacias cercanas</li>
+        <li><strong>Lupa de Búsqueda:</strong> Sistema de búsqueda que funciona como una lupa, ampliando y presentando resultados relevantes de centros de salud, medicamentos o especialidades médicas</li>
+      </ul>
+    </div>
+    <div class="section-card">
+      <h2>Metáforas de Diseño</h2>
+      <p>Conceptos que guían nuestra interfaz:</p>
+      <ul>
+        <li><strong>Mapa de Salud:</strong> Una interfaz que permite a los usuarios explorar y navegar por centros de salud, hospitales y farmacias como si estuvieran usando un mapa físico, con marcadores interactivos para más información</li>
+        <li><strong>Farmacia Virtual:</strong> Presentación de medicamentos en "estanterías virtuales" que muestran disponibilidad y precios en farmacias cercanas</li>
+        <li><strong>Lupa de Búsqueda:</strong> Sistema de búsqueda que funciona como una lupa, ampliando y presentando resultados relevantes de centros de salud, medicamentos o especialidades médicas</li>
+      </ul>
+    </div>
+    <div class="section-card">
+      <h2 class="mb-4">Diseño de Sketches y "Crazy 8s"</h2>
+      <div class="user-story-section mb-4">
+
+        <h3 class="text-primary mb-4">User Story I</h3>
+        <div class="user-profile section-card mb-4">
+          <img src="img/Maria.avif" alt="Perfil de María González" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 200px; object-fit: cover;">
+          <h3 class="text-primary mt-2">María González</h3>
+          <div class="profile-details">
+            <p class="mb-2"><strong>Profesión:</strong> Enfermera</p>
+            <p class="mb-2"><strong>Edad:</strong> 32 años</p>
+            <div class="biography mt-4">
+              <h4 class="text-primary">Biografía</h4>
+              <p>María es una enfermera dedicada con una amplia red de contactos en el sector de la salud en Paraguay. Tiene una agenda apretada y no siempre tiene tiempo para buscar información detallada sobre centros de salud o hacer múltiples llamadas a farmacias para verificar la disponibilidad de medicamentos.</p>
+            </div>
+            <div class="motivation mt-4">
+              <h4 class="text-primary">Motivación</h4>
+              <p>Busca brindar atención de calidad a sus pacientes y siempre busca información actualizada sobre centros de salud, especialidades y precios de medicamentos</p>
+            </div>
+            <div class="goals mt-4">
+              <h4 class="text-primary">Metas</h4>
+              <p>Necesito una forma rápida y confiable de acceder a información sobre centros de salud y medicamentos en Paraguay</p>
+            </div>
+            <div class="needs mt-4">
+              <h4 class="text-primary">Necesidades</h4>
+              <ul>
+                <li>Acceso rápido a información sobre centros de salud</li>
+                <li>Búsqueda de medicamentos en farmacias</li>
+                <li>Contar con información actualizada</li>
+                <li>Recibir notificaciones sobre ofertas especiales de medicamentos o cambios de horario de atención de centros de salud</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="user-action section-card mb-4">
+          <h4 class="text-secondary">Acción:</h4>
+          <p>Buscar opciones de Centros de salud o medicamentos para recomendar a sus pacientes</p>
+        </div>
+      </div>
+
+      <h4 class="text-primary mb-4">Sketches por Diseñador:</h4>
+      <div class="sketch-container mb-4">
+        <div class="sketch-item mb-8">
+          <img src="img/Gabriel1.png" alt="Sketch por Gabriel" class="rounded shadow-md" style="width: 100%; height: auto; max-width: none;">
+          <p class="mt-2">Por Gabriel</p>
+        </div>
+        <div class="sketch-item">
+          <img src="img/Geronimo1.png" alt="Sketch por Gerónimo" class="rounded shadow-md" style="width: 100%; height: auto; max-width: none;">
+          <p class="mt-2">Por Gerónimo</p>
+        </div>
+      </div>
+      <div class="evaluation-section section-card">
+        <h4 class="text-primary mb-2">Evaluación Heurística:</h4>
+        <div class="evaluation-list">
+          <ul>
+            <li class="mb-2"><strong>H5 Prevención de errores:</strong> Barra de búsqueda sin ayuda de autocompletado que prevea errores de tipeo del usuario</li>
+            <li class="mb-2"><strong>H6 Reconocimiento en lugar de recordar:</strong> No posee un historial de búsqueda que ayude al usuario a no memorizar</li>
+            <li class="mb-2"><strong>H10 Ayuda y Documentación:</strong> Debería existir más formas de buscar un tipo de medicamento y no solo la barra de búsqueda</li>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="user-story-section mb-8">
+      <h3 class="text-primary mb-4">User Story II</h3>
+      <div class="user-profile section-card mb-4">
+        <img src="img/Juan.avif" alt="Perfil de Juan Pérez" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+        <h3 class="text-primary mt-2">Juan Pérez</h3>
+        <div class="profile-details">
+          <p class="mb-2"><strong>Profesión:</strong> Empresario</p>
+          <p class="mb-2"><strong>Edad:</strong> 45 años</p>
+          <div class="biography mt-4">
+            <h4 class="text-primary">Biografía</h4>
+            <p>Juan es un empresario ocupado que viaja con frecuencia por negocios y reside en Ciudad del Este. Recientemente ha sido diagnosticado con una afección médica que requiere tratamiento especializado</p>
+          </div>
+          <div class="motivation mt-4">
+            <h4 class="text-primary">Motivación</h4>
+            <p>Juan, como viaja tanto no está muy familiarizado con los centros de atención de la zona y espera siempre contar con los datos necesarios de centros médicos para ser atendido.</p>
+          </div>
+          <div class="goals mt-4">
+            <h4 class="text-primary">Metas</h4>
+            <p>Está buscando opciones de hospitales en Paraguay que ofrezcan la especialidad médica que necesita y desea obtener la mejor atención médica al precio más conveniente.</p>
+          </div>
+          <div class="needs mt-4">
+            <h4 class="text-primary">Necesidades</h4>
+            <p>Búsqueda de hospitales especializados, comparación de precios, ubicación y horarios de hospitales, leer reseñas y recomendaciones.</p>
+          </div>
+        </div>
+      </div>
+      <div class="user-action section-card mb-4">
+        <h4 class="text-secondary">Acción:</h4>
+        <p>Buscar opciones de hospitales que cuenten con el tratamiento médico que necesita</p>
+      </div>
+    </div>
+
+    <div class="sketch-container mb-4">
+      <div class="sketch-item"><img src="img/User2.png" alt="Sketch de User Story II" class="rounded shadow-md" style="width: 100%; height: auto; max-width: none;"></div>
+    </div>
+    <div class="evaluation-section section-card mb-4">
+      <h4 class="text-primary mb-2">Evaluaciones Heurísticas:</h4>
+      <div class="evaluation-list">
+        <ul>
+          <li class="mb-2"><strong>H4 Coherencia y estándares:</strong> Si los pasos adicionales no siguen convenciones de diseño o estándares, esto podría ser un problema de usabilidad.</li>
+          <li class="mb-2"><strong>H3 Control y libertad del usuario:</strong> Los usuarios deben tener la capacidad de deshacer acciones y moverse libremente dentro del sistema. Si hay pasos innecesarios que limitan la libertad del usuario, podría ser un problema.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cognitive-walkthrough section-card">
+      <h4 class="text-primary mb-2">Recorrido Cognitivo:</h4>
+      <div class="walkthrough-steps">
+        <div class="step mb-4">
+          <p class="font-medium">1- Hacer click en filtrar</p>
+          <ul class="ml-4 mt-2">
+            <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ❌</li>
+            <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ❌</li>
+            <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ❌</li>
+            <li>¿Van a entender los usuarios el feedback que reciben? ❌</li>
+            <p class="mt-2 text-sm italic">3 puntuaciones negativas ya que el paso fue evitado.</p>
+          </ul>
+        </div>
+        <div class="step mb-4">
+          <p class="font-medium">2- Seleccionar el switch de Tratamientos Médicos</p>
+          <ul class="ml-4 mt-2">
+            <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ❌</li>
+            <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ❌</li>
+            <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ❌</li>
+            <li>¿Van a entender los usuarios el feedback que reciben? ❌</li>
+            <p class="mt-2 text-sm italic">3 puntuaciones negativas ya que el paso fue evitado.</p>
+          </ul>
+        </div>
+        <div class="step mb-4">
+          <p class="font-medium">3- Escribir el tratamiento médico (ejem.: tratamiento de conducto) en la barra de búsqueda</p>
+          <ul class="ml-4 mt-2">
+            <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ✅</li>
+            <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ✅</li>
+            <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ✅</li>
+            <li>¿Van a entender los usuarios el feedback que reciben? ✅</li>
+            <p class="mt-2 text-sm italic">3 puntuaciones positivas</p>
+          </ul>
+        </div>
+        <div class="step">
+          <p class="font-medium">4- Seleccionar el Tratamiento Conducto del Hospital dd.ee y ver sus horarios de atención</p>
+          <ul class="ml-4 mt-2">
+            <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ✅</li>
+            <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ✅</li>
+            <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ✅</li>
+            <li>¿Van a entender los usuarios el feedback que reciben? ✅</li>
+            <p class="mt-2 text-sm italic">3 puntuaciones positivas</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="user-story-section mb-8">
+        <h3 class="text-primary mb-4">User Story III</h3>
+        <div class="user-profile section-card mb-4">
+          <img src="img/Laura.avif" alt="Perfil de Laura Martínez" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+          <h3 class="text-primary mt-2">Laura Martínez</h3>
+          <div class="profile-details">
+            <p class="mb-2"><strong>Profesión:</strong> Estudiante universitaria</p>
+            <p class="mb-2"><strong>Edad:</strong> 28 años</p>
+            <div class="biography mt-4">
+              <h4 class="text-primary">Biografía</h4>
+              <p>Laura es una estudiante universitaria ocupada que tiene un horario académico apretado. Recientemente, su médico le recetó un medicamento específico para tratar una afección médica.</p>
+            </div>
+            <div class="motivation mt-4">
+              <h4 class="text-primary">Motivación</h4>
+              <p>No tiene mucho tiempo libre para buscar en diferentes farmacias y preguntar si tienen el medicamento que necesita. Utiliza su teléfono inteligente para la mayoría de sus tareas diarias y está familiarizada con aplicaciones móviles.</p>
+            </div>
+            <div class="goals mt-4">
+              <h4 class="text-primary">Metas</h4>
+              <p>Necesito encontrar un medicamento específico de manera rápida y eficiente en Paraguay</p>
+            </div>
+            <div class="needs mt-4">
+              <h4 class="text-primary">Necesidades</h4>
+              <p>Búsqueda eficiente de medicamentos, información de precios y disponibilidad, ubicación y horarios de las farmacias, notificaciones de disponibilidad de medicamentos y ofertas especiales.</p>
+            </div>
+          </div>
+        </div>
+        <div class="user-action section-card mb-4">
+          <h4 class="text-secondary">Acción:</h4>
+          <p>Buscar Medicamentos</p>
+        </div>
+      </div>
+      <div class="sketch-container mb-4">
+        <div class="sketch-item"><img src="img/User3.png" alt="Sketch de Buscar Medicamentos" class="rounded shadow-md" style="width: 100%; height: auto; max-width: none;"></div>
+      </div>
+      <div class="evaluation-section section-card">
+        <h4 class="text-primary mb-2">Evaluaciones Heurísticas:</h4>
+        <div class="evaluation-list">
+          <ul>
+            <li class="mb-2"><strong>H4 Coherencia y estándares:</strong> La expectativa del usuario es al buscar un medicamento, y el buscador debe reflejar esa acción específica como "Buscar Medicamentos", pero indica "Buscar Hospitales o Farmacias", podría ser confuso o no estar en línea con las expectativas del usuario.</li>
+            <li class="mb-2"><strong>H3 Control y libertad del usuario:</strong> La pantalla del mapa solo permite la búsqueda de farmacias y hospitales según lo indicado en el buscador, no tiene el control de elegir alguna otra de las características de la aplicación.</li>
+            <li class="mb-2"><strong>H1 Visibilidad del estado del sistema:</strong> No proporciona una retroalimentación clara y visible sobre lo que sucede cuando se interactúa con algún botón de "Categorías".</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cognitive-walkthrough section-card mt-4">
+        <h4 class="text-primary mb-2">Recorrido Cognitivo:</h4>
+        <div class="walkthrough-steps">
+          <div class="step mb-4">
+            <p class="font-medium">1- Hacer click en la Categoría de Farmacias</p>
+            <ul class="ml-4 mt-2">
+              <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ✅</li>
+              <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ✅</li>
+              <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ✅ 1 puntuación positiva; ❌ 2 negativas, ya que los botones no indican que serán redirigidos a un mapa</li>
+              <li>¿Van a entender los usuarios el feedback que reciben? ✅</li>
+              <p class="mt-2 text-sm italic">3 puntuaciones positivas</p>
+            </ul>
+          </div>
+          <div class="step mb-4">
+            <p class="font-medium">2- Buscar en el buscador el medicamento ibuprofeno</p>
+            <ul class="ml-4 mt-2">
+              <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ✅</li>
+              <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ✅</li>
+              <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ✅</li>
+              <li>¿Van a entender los usuarios el feedback que reciben? ✅</li>
+              <p class="mt-2 text-sm italic">3 puntuaciones positivas</p>
+            </ul>
+          </div>
+          <div class="step mb-4">
+            <p class="font-medium">3- Seleccionar la farmacia más cercana que tenga el ibuprofeno</p>
+            <ul class="ml-4 mt-2">
+              <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ✅</li>
+              <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ✅</li>
+              <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ✅</li>
+              <li>¿Van a entender los usuarios el feedback que reciben? ✅</li>
+              <p class="mt-2 text-sm italic">3 puntuaciones positivas</p>
+            </ul>
+          </div>
+          <div class="step">
+            <p class="font-medium">4- Realizar un pedido</p>
+            <ul class="ml-4 mt-2">
+              <li>¿El efecto de la acción corresponde al objetivo final del usuario en este paso? ✅</li>
+              <li>¿El usuario puede ver los controles disponibles para las acciones posibles? ✅</li>
+              <li>¿Reconocen que acción va a realizarse? ¿Están seguros que es la acción que necesitan? ✅</li>
+              <li>¿Van a entender los usuarios el feedback que reciben? ✅</li>
+              <p class="mt-2 text-sm italic">3 puntuaciones positivas</p>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="user-story-section mb-8">
+        <h3 class="text-primary mb-4">User Story IV</h3>
+        <div class="user-profile section-card mb-4">
+          <img src="img/Matias.avif" alt="Perfil de Matías Álvarez" class="profile-image rounded-lg shadow-md" style="width: 200px; height: 300px; object-fit: cover;">
+          <h3 class="text-primary mt-2">Matías Álvarez</h3>
+          <div class="profile-details">
+            <p class="mb-2"><strong>Profesión:</strong> Ingeniero de Software</p>
+            <p class="mb-2"><strong>Edad:</strong> 28 años</p>
+            <div class="biography mt-4">
+              <h4 class="text-primary">Biografía</h4>
+              <p>Matías Álvarez es un hombre de 35 años que trabaja como ingeniero de software en una empresa de tecnología. Le gusta mantenerse activo y cuidar de su salud. Matías ha tenido algunos problemas de salud en el pasado, lo que lo ha llevado a ser más consciente de la importancia de las revisiones médicas regulares.</p>
+            </div>
+            <div class="motivation mt-4">
+              <h4 class="text-primary">Motivación</h4>
+              <p>La motivación principal de Matías es mantenerse saludable y prevenir cualquier problema de salud grave. Valora su tiempo y quiere evitar pérdidas de tiempo innecesarias al agendar y esperar en una cita médica.</p>
+            </div>
+            <div class="goals mt-4">
+              <h4 class="text-primary">Metas</h4>
+              <ul>
+                <li>Agendar una cita médica de manera conveniente y eficiente</li>
+                <li>Evitar largas esperas en la sala de espera del consultorio médico</li>
+              </ul>
+            </div>
+            <div class="needs mt-4">
+              <h4 class="text-primary">Necesidades</h4>
+              <p>Necesita encontrar un médico de confianza en su área que pueda atender sus necesidades de atención médica general. Quiere poder elegir una fecha y hora para la cita que se ajuste a su horario de trabajo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="user-action section-card mb-4">
+          <h4 class="text-secondary">Acción:</h4>
+          <p>Realizar una Cita Médica</p>
+        </div>
+      </div>
+      <div class="sketch-container mb-4">
+        <div class="sketch-item mb-8"><img src="img/user4.png" alt="Sketch por Gabriel" class="rounded shadow-md" style="width: 100%; height: auto; max-width: none;"></div>
+      </div>
+      <div class="evaluation-section section-card mb-4">
+        <h4 class="text-primary mb-2">Evaluaciones Heurísticas:</h4>
+        <div class="evaluation-list">
+          <ul>
+            <li class="mb-2"><strong>H4 Consistencia y Estándares:</strong> Las categorías, lista de nombres deben ser escogidos siguiendo un estándar del negocio o actividad.</li>
+            <li class="mb-2"><strong>H6 Reconocimiento en lugar de recordar:</strong> Una lista de muestras o recordatorio de búsqueda reciente del usuario.</li>
+            <li class="mb-2"><strong>H10 Ayuda y Documentación:</strong> La forma de filtrar o buscar a través de una especialidad y una clínica específica, tal vez no sea muy fácil de usar para personas que no frecuentan con la tecnología.</li>
+          </ul>
+        </div>
+      </div><a href="#" class="back-to-top" title="Volver arriba">↑</a> 
+
+
+  </div>
+  
+  <script>
+
+
+        // Smooth scroll para el botón de volver arriba
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mostrar/ocultar botón de volver arriba
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+  </script>
+</body>
+</html>

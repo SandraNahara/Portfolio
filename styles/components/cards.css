@@ -1,0 +1,96 @@
+/* Estilos base para cards */
+.card {
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    transition: transform var(--transition-normal);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Tipos de cards */
+.card-milestone {
+    padding: var(--spacing-xl);
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+}
+
+.card-section {
+    background-color: var(--white);
+    margin-bottom: var(--spacing-lg);
+}
+
+.card-metric {
+    text-align: center;
+    background-color: var(--background-color);
+}
+
+/* Header de card */
+.card-header {
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.card-title {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+/* Contenido de card */
+.card-content {
+    margin-bottom: var(--spacing-md);
+}
+
+.card-list {
+    list-style-position: inside;
+    margin: var(--spacing-md) 0;
+}
+
+.card-list li {
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+/* Footer de card */
+.card-footer {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--background-color);
+}
+
+/* Variantes de cards */
+.card-full-width {
+    grid-column: 1 / -1;
+}
+
+.card-interactive {
+    cursor: pointer;
+}
+
+/* Estados de cards */
+.card-active {
+    border-left: 4px solid var(--accent-color);
+}
+
+.card-disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        padding: var(--spacing-md);
+    }
+
+    .card-milestone {
+        padding: var(--spacing-lg);
+    }
+}
