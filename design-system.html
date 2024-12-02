@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - SaludApp</title>
+    <style>
+        :root {
+            /* Colores principales */
+            --primary: #00A693;
+            --secondary: #7FFFD4;
+            --accent: #DEB887;
+            --neutral: #F0E68C;
+            
+            /* Colores secundarios */
+            --light-green: #98FB98;
+            --light-pink: #FFB6C1;
+            --light-orange: #DEB887;
+            
+            /* Espaciado */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Popins, sans-serif;
+        }
+
+        body {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Paleta de colores */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-item {
+            padding: 1rem;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .color-primary { background-color: var(--primary); }
+        .color-secondary { background-color: var(--secondary); }
+        .color-accent { background-color: var(--accent); }
+        .color-neutral { background-color: var(--neutral); }
+        .color-light-green { background-color: var(--light-green); }
+        .color-light-pink { background-color: var(--light-pink); }
+        .color-light-orange { background-color: var(--light-orange); }
+
+        /* Tipografía */
+        .typography-example {
+            margin-bottom: 2rem;
+        }
+
+        .font-weight-example {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Componentes */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .component-card {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Iconos */
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Botones */
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .button-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .button-secondary {
+            background-color: var(--secondary);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>SaludApp - Design System</h1>
+
+    <section class="section">
+        <h2>1. Paleta de Colores</h2>
+        <div class="color-grid">
+            <div class="color-item color-primary">
+                <h3>Primary</h3>
+                <p>#00A693</p>
+                <p>Color principal para la marca y CTA's</p>
+            </div>
+            <div class="color-item color-secondary">
+                <h3>Secondary</h3>
+                <p>#7FFFD4</p>
+                <p>Color secundario para elementos de apoyo</p>
+            </div>
+            <div class="color-item color-accent">
+                <h3>Accent</h3>
+                <p>#DEB887</p>
+                <p>Color de acento para destacados</p>
+            </div>
+            <div class="color-item color-neutral">
+                <h3>Neutral</h3>
+                <p>#F0E68C</p>
+                <p>Color neutro para fondos suaves</p>
+            </div>
+        </div>
+        
+        <h3>Colores Secundarios</h3>
+        <div class="color-grid">
+            <div class="color-item color-light-green">
+                <h3>Light Green</h3>
+                <p>#98FB98</p>
+                <p>Para estados positivos y éxito</p>
+            </div>
+            <div class="color-item color-light-pink">
+                <h3>Light Pink</h3>
+                <p>#FFB6C1</p>
+                <p>Para alertas y avisos</p>
+            </div>
+            <div class="color-item color-light-orange">
+                <h3>Light Orange</h3>
+                <p>#DEB887</p>
+                <p>Para estados de advertencia</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>2. Sistema Tipográfico</h2>
+        <div class="typography-example">
+            <h3>Familia Principal: Popins</h3>
+            <div class="font-weight-example">
+                <div>
+                    <h4>Extra Light</h4>
+                    <p style="font-weight: 200">The quick brown fox jumps over the lazy dog</p>
+                </div>
+                <div>
+                    <h4>Light</h4>
+                    <p style="font-weight: 300">The quick brown fox jumps over the lazy dog</p>
+                </div>
+                <div>
+                    <h4>Regular</h4>
+                    <p style="font-weight: 400">The quick brown fox jumps over the lazy dog</p>
+                </div>
+                <div>
+                    <h4>Medium</h4>
+                    <p style="font-weight: 500">The quick brown fox jumps over the lazy dog</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>3. Componentes</h2>
+        <div class="components-grid">
+            <div class="component-card">
+                <h3>Botones</h3>
+                <button class="button button-primary">Botón Principal</button>
+                <button class="button button-secondary">Botón Secundario</button>
+            </div>
+            <div class="component-card">
+                <h3>Cards</h3>
+                <div style="padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h4>Título de Card</h4>
+                    <p>Contenido de ejemplo para la card</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>4. Iconos</h2>
+        <div class="icons-grid">
+            <div class="icon-item">
+                <span>👥</span>
+                <p>Usuarios</p>
+            </div>
+            <div class="icon-item">
+                <span>📋</span>
+                <p>Documentos</p>
+            </div>
+            <div class="icon-item">
+                <span>💊</span>
+                <p>Medicamentos</p>
+            </div>
+            <div class="icon-item">
+                <span>🏥</span>
+                <p>Hospital</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>5. Espaciado y Layout</h2>
+        <div style="background: #f5f5f5; padding: 1rem; border-radius: 8px;">
+            <h3>Sistema de Espaciado</h3>
+            <ul>
+                <li>xs: 0.25rem (4px)</li>
+                <li>sm: 0.5rem (8px)</li>
+                <li>md: 1rem (16px)</li>
+                <li>lg: 1.5rem (24px)</li>
+                <li>xl: 2rem (32px)</li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
