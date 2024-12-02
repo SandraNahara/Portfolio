@@ -67,6 +67,17 @@
             color: var(--accent-color);
         }
 
+        .design-system-button {
+            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .design-system-button:hover {
+            background-color: var(--secondary-color);
+        }
+
         .hero {
             height: 100vh;
             display: flex;
@@ -124,6 +135,16 @@
             color: var(--primary-color);
             margin-bottom: 1rem;
             font-size: 1.5rem;
+        }
+
+        .milestone-card.design-system {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .milestone-card.design-system h3,
+        .milestone-card.design-system p {
+            color: white;
         }
 
         .milestone-card img {
@@ -190,6 +211,7 @@
                 <li><a href="milestone1.html">Milestone 1</a></li>
                 <li><a href="milestone2.html">Milestone 2</a></li>
                 <li><a href="milestone3.html">Milestone 3</a></li>
+                <li><a href="design-system.html" class="design-system-button">Design System</a></li>
             </ul>
         </nav>
     </header>
@@ -228,6 +250,10 @@
             <a href="milestone3.html" class="milestone-card">
                 <h3>Milestone 3</h3>
                 <p>Implementación y Pruebas</p>
+            </a>
+            <a href="design-system.html" class="milestone-card design-system">
+                <h3>Design System</h3>
+                <p>Sistema de Diseño y Componentes</p>
             </a>
         </div>
     </section>
